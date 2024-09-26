@@ -50,8 +50,10 @@ done
 
 # cmake
 if $QUIET; then
+    cmake -B build -S . -G Ninja 2>&1
     cmake build/ > /dev/null 2>&1
 else
+    cmake -B build -S . -G Ninja 2>&1
     cmake build/
 fi
 
@@ -59,13 +61,15 @@ if [ $? -eq 0 ]; then
     echo "CMake executed succesfully."
 else
     echo "Ooooops..... something went wrong."
+
+    echo "if you don't have build folder try running \"cmake -B build -S . -G Ninja\""
 fi
 
 # ninja
 if $QUIET; then
-    ninja all > /dev/null 2>&1
+    ninja -C build > /dev/null 2>&1
 else
-    ninja all
+    ninja -C build
 fi
 
 if [ $? -eq 0 ]; then
@@ -76,7 +80,7 @@ fi
 
 # loading the .elf to pico
 if [ -z "$PICOTOOL_PATH" ]; then
-    echo "picotool not found. try \"sudo apt-get install picotool\" "
+    echo "picotool not found. "
 else
     current_path=`pwd`
     sudo $PICOTOOL_PATH load $current_path/build/pico-gng.elf -fx
