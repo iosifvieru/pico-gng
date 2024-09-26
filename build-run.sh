@@ -1,4 +1,4 @@
-#!/bin/bash -i
+#!/bin/bash
 # created by Iosif Vieru.
 # 26.09.2024
 
@@ -6,7 +6,8 @@ OPTSTRING=":qhd"
 QUIET=false
 DEBUG=false
 
-PICOTOOL_PATH=$(which picotool)
+#PICOTOOL_PATH=$(which picotool)
+PICOTOOL_PATH="/home/$USER/.pico-sdk/picotool/2.0.0/picotool/picotool"
 
 usage()
 {
